@@ -1,0 +1,48 @@
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 8px;
+}
+
+.desc {
+    font-size: 14px;
+    margin-top: 6px;
+    color: #666666;
+    max-width: 400px;
+}
+
+.count {
+    font-size: 12px;
+    margin-top: 8px;
+    color: #999999;
+}
+
+.link {
+    display: inline-block;
+    padding: 12px 16px;
+    border: 1px solid #d9d9d9; /* светло-серая рамка */
+    border-radius: 8px;
+    color: black; /* обычный текст черный */
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.link:hover {
+    border-color: #4096ff; /* ярко-синяя рамка */
+    color: #4096ff; /* текст становится синим */
+}
