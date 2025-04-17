@@ -1,0 +1,56 @@
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+        border: 1px solid #4096ff;
+    }
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #222222;
+    margin-bottom: 8px;
+}
+
+.status {
+    font-size: 14px;
+    color: #888888;
+    margin-bottom: 6px;
+}
+
+.assigneeName {
+    font-size: 14px;
+    color: #666666;
+    margin-bottom: 6px;
+}
+
+.priority {
+    font-size: 14px;
+    color: #666666;
+}
+
+button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #222222;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #e5e5e5;
+    }
+}
