@@ -1,0 +1,40 @@
+.boardPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.projectName {
+    width: 1382px;
+    align-self: start;
+    padding-left: 28px;
+}
+
+.columnsBlock {
+    display: flex;
+    gap: 1rem;
+}
+
+// BoardColumns
+
+.column {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid #4096ff;
+    border-radius: 1rem;
+}
+
+.columnTitle {
+    width: 100%;
+    padding-bottom: 1rem;
+    font-size: 1.25rem;
+    text-align: center;
+    border-bottom: 2px solid #4096ff;
+}
+
+.droppableArea {
+    min-height: 200px;
+    padding: 8px;
+    border-radius: 8px;
+}
