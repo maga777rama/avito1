@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
+import { useModal } from "@/app/providers";
 import { useBoards } from "@/entities/board";
 import styles from "./IssuesPage.module.scss";
 import { useIssues, IssueCard } from "@/entities/issue";
@@ -13,6 +14,7 @@ const IssuesPage = () => {
     // поэтому сделал так вместо того, чтобы составлять список проектов по задачам
     const { boards } = useBoards();
 
+    const { openModal } = useModal();
     const [searchValue, setSearchValue] = useState("");
     const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
     const [selectedBoards, setSelectedBoards] = useState<number[]>([]);
@@ -125,7 +127,16 @@ const IssuesPage = () => {
                 ))}
             </div>
             <div className={styles.createButton}>
-                <Button size={"large"}>Создать задачу</Button>
+                <Button
+                    size={"large"}
+                    onClick={() =>
+                        openModal({
+                            mode: "Создание",
+                        })
+                    }
+                >
+                    Создать задачу
+                </Button>
             </div>
         </div>
     );

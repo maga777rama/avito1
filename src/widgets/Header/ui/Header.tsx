@@ -1,11 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.scss";
+import { useModal } from "@/app/providers";
 import { Button } from "antd";
 
 export const Header = () => {
     const location = useLocation();
     const isActive = (path: string) => location.pathname.startsWith(path);
-
+    const { openModal } = useModal();
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>
@@ -23,7 +24,16 @@ export const Header = () => {
                         Проекты
                     </Link>
                 </div>
-                <Button size={"large"}>Создать задачу</Button>
+                <Button
+                    size={"large"}
+                    onClick={() =>
+                        openModal({
+                            mode: "Создание",
+                        })
+                    }
+                >
+                    Создать задачу
+                </Button>
             </nav>
         </header>
     );

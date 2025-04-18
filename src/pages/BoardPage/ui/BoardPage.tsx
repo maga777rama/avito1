@@ -2,13 +2,14 @@ import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { BoardColumn } from "./BoardColumn.tsx";
 import { useBoardTasks } from "@/pages/BoardPage";
 import { TaskStatus } from "@/entities/issue";
-
+import { useOpenModalFromRoute } from "@/shared/lib/hooks";
 import { useUpdateTaskStatus } from "@/features/updateTaskStatus";
 import { useBoards } from "@/entities/board";
 import styles from "./Board.module.scss";
 const BoardPage = () => {
     const { tasks, boardId, isLoading } = useBoardTasks();
     const { boards } = useBoards();
+    useOpenModalFromRoute(boardId);
 
     const currentBoard = boards.find((board) => board.id === boardId);
 

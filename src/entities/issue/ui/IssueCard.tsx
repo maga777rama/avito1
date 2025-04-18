@@ -1,6 +1,6 @@
 import { IssueCardProps } from "../model/types";
 import styles from "./IssueCard.module.scss";
-
+import { useModal } from "@/app/providers";
 import { Draggable } from "@hello-pangea/dnd";
 
 export const IssueCard = ({
@@ -8,8 +8,18 @@ export const IssueCard = ({
     index,
     draggable = false,
 }: IssueCardProps) => {
+    const { openModal } = useModal();
+
+    const handleOpenModal = () => {
+        openModal({
+            mode: "Редактирование",
+            taskId: issue.id,
+            projectIdFromBoard: issue.boardId,
+        });
+    };
+
     const content = (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={handleOpenModal}>
             <div>
                 <div className={styles.title}>{issue.title}</div>
                 {!draggable && (

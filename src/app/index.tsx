@@ -3,12 +3,14 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "@/app/App.tsx";
 
 import "./styles/styles.scss";
-import { QueryProvider } from "@/app/providers";
+import { ModalProvider, QueryProvider } from "@/app/providers";
 
 createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
         <QueryProvider>
-            <App />
+            <ModalProvider>
+                <App />
+            </ModalProvider>
         </QueryProvider>
     </BrowserRouter>,
 );
