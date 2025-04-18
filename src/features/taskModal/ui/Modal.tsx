@@ -17,10 +17,11 @@ import { useUpdateTask } from "@/features/updateTask";
 import { useCreateTask } from "@/features/createTask";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { CreateDraftStorage } from "@/shared/lib";
 import styles from "./Modal.module.scss";
 
 const { TextArea } = Input;
+const Draft = CreateDraftStorage<FieldType>("taskDraft");
 
 const Modal = () => {
     const { open, mode, taskId, projectIdFromBoard, closeModal } = useModal();
@@ -39,6 +40,15 @@ const Modal = () => {
     const isFromBoardPage = location.pathname.startsWith("/board/");
     const shouldShowGoToBoardButton =
         mode === "Редактирование" && !isFromBoardPage;
+
+    useEffect(() => {
+        if (open && mode === "Создание") {
+            const draft = Draft.get();
+            if (draft) {
+                form.setFieldsValue(draft);
+            }
+        }
+    }, [open, mode]);
 
     useEffect(() => {
         if (open && mode === "Редактирование" && taskId) {
@@ -68,6 +78,7 @@ const Modal = () => {
     const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
         if (mode === "Создание") {
             await createTask(values);
+            Draft.clear();
         } else if (mode === "Редактирование" && taskId) {
             await updateTask({ id: taskId, values });
         }
@@ -104,6 +115,7 @@ const Modal = () => {
             onOk={handleOk}
             onCancel={() => {
                 closeModal();
+                Draft.clear();
             }}
             afterClose={() => form.resetFields()}
             footer={[
@@ -136,6 +148,11 @@ const Modal = () => {
                     autoComplete="off"
                     size={"large"}
                     className={styles.customForm}
+                    onValuesChange={(_, allValues) => {
+                        if (mode === "Создание") {
+                            Draft.save(allValues);
+                        }
+                    }}
                 >
                     <Form.Item<FieldType>
                         label="Название"
