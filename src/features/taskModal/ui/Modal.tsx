@@ -30,7 +30,7 @@ const Modal = () => {
 
     const queryClient = useQueryClient();
 
-    const { boards, loading: loadingBoards } = useBoards();
+    const { boards, loading: loadingBoards } = useBoards(open);
     const { users, loading: loadingUsers } = useUsers(open); // чтобы юзеры грузились когда
 
     const { mutateAsync: createTask } = useCreateTask();

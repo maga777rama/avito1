@@ -1,16 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { boardApi } from "@/entities/board";
 
-export const useBoards = (enabled: boolean) => {
+export const useBoard = (id: number) => {
     const { data, isLoading, isError } = useQuery({
-        queryKey: ["boards"],
+        queryKey: ["board", id],
         queryFn: ({ signal }) =>
-            boardApi.getAll(signal).then((res) => res.data.data),
-        enabled,
+            boardApi.getBoardTasks(id, signal).then((res) => res.data.data),
     });
 
     return {
-        boards: data ?? [],
+        tasks: data ?? [],
         loading: isLoading,
         error: isError,
     };
