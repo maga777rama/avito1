@@ -6,8 +6,8 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone <ссылка на репозиторий>
-   cd <название директории>
+   git clone https://github.com/maga777rama/avito1
+   cd avito1
 
 2. Запустить проект через Docker-compose
     ```bash

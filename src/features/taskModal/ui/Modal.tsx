@@ -55,7 +55,7 @@ const Modal = () => {
             const allTasks =
                 queryClient.getQueryData<Issue[]>(["issues"]) ||
                 queryClient.getQueryData<Issue[]>([
-                    "issues",
+                    "board",
                     projectIdFromBoard,
                 ]);
             const task = allTasks?.find((t: Issue) => t.id === taskId);
@@ -64,7 +64,7 @@ const Modal = () => {
                 form.setFieldsValue({
                     title: task.title,
                     description: task.description,
-                    boardId: task.boardId,
+                    boardId: task.boardId || projectIdFromBoard,
                     priority: task.priority,
                     status: task.status,
                     assigneeId: task.assignee.id,

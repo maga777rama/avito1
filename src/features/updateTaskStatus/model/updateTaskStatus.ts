@@ -15,12 +15,12 @@ export const useUpdateTaskStatus = (boardId: number) => {
         onMutate: async ({ taskId, status }) => {
             // отмена текущих запросов чтоб они не затирали кеш
             await queryClient.cancelQueries({ queryKey: ["issues"] });
-            await queryClient.cancelQueries({ queryKey: ["issues", boardId] });
+            await queryClient.cancelQueries({ queryKey: ["board", boardId] });
 
             // на случай возникновения ошибки при выполнении запроса, сохраняем копию старого кеша
             const previousAll = queryClient.getQueryData<Issue[]>(["issues"]);
             const previousBoard = queryClient.getQueryData<Issue[]>([
-                "issues",
+                "board",
                 boardId,
             ]);
 
@@ -29,7 +29,7 @@ export const useUpdateTaskStatus = (boardId: number) => {
 
             // патчим изменения локально
             queryClient.setQueryData(["issues"], patch);
-            queryClient.setQueryData(["issues", boardId], patch);
+            queryClient.setQueryData(["board", boardId], patch);
 
             return { previousAll, previousBoard };
         },
@@ -38,14 +38,11 @@ export const useUpdateTaskStatus = (boardId: number) => {
             if (ctx?.previousAll)
                 queryClient.setQueryData(["issues"], ctx.previousAll);
             if (ctx?.previousBoard)
-                queryClient.setQueryData(
-                    ["issues", boardId],
-                    ctx.previousBoard,
-                );
+                queryClient.setQueryData(["board", boardId], ctx.previousBoard);
         },
         onSettled: () => {
             queryClient.invalidateQueries({ queryKey: ["issues"] });
-            queryClient.invalidateQueries({ queryKey: ["issues", boardId] });
+            queryClient.invalidateQueries({ queryKey: ["board", boardId] });
         },
     });
 };
