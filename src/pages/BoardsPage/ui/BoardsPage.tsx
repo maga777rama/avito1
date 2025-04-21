@@ -2,7 +2,7 @@ import { useBoards, BoardCard } from "@/entities/board";
 import { Spin } from "antd";
 
 const BoardsPage = () => {
-    const { boards, loading } = useBoards();
+    const { boards, loading } = useBoards(true);
 
     if (loading) return <Spin />;
 
