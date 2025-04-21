@@ -1,5 +1,5 @@
 import { Droppable } from "@hello-pangea/dnd";
-import { IssueCard } from "@/entities/issue";
+import { Issue, IssueCard } from "@/entities/issue";
 import { BoardColumnProps } from "@/pages/BoardPage";
 import styles from "./Board.module.scss";
 
@@ -17,7 +17,7 @@ export const BoardColumn = ({ title, status, tasks }: BoardColumnProps) => {
                         {tasks.map((task, index) => (
                             <IssueCard
                                 key={task.id}
-                                issue={task}
+                                issue={task as Issue}
                                 index={index}
                                 draggable={true}
                             />

@@ -16,13 +16,13 @@ export const useUpdateTask = (boardId: number | undefined) => {
             );
 
             queryClient.setQueriesData<Issue[]>(
-                { queryKey: ["issues", boardId] },
+                { queryKey: ["board", boardId] },
                 (old) =>
                     old?.map((t) => (t.id === id ? { ...t, ...values } : t)),
             );
 
             queryClient.invalidateQueries({ queryKey: ["issues"] });
-            queryClient.invalidateQueries({ queryKey: ["issues", boardId] });
+            queryClient.invalidateQueries({ queryKey: ["board", boardId] });
         },
     });
 };

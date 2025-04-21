@@ -2,6 +2,7 @@ import { IssueCardProps } from "../model/types";
 import styles from "./IssueCard.module.scss";
 import { useModal } from "@/app/providers";
 import { Draggable } from "@hello-pangea/dnd";
+import { useParams } from "react-router-dom";
 
 export const IssueCard = ({
     issue,
@@ -10,11 +11,14 @@ export const IssueCard = ({
 }: IssueCardProps) => {
     const { openModal } = useModal();
 
+    const { id } = useParams<{ id: string }>();
+    const boardId = Number(id);
+
     const handleOpenModal = () => {
         openModal({
             mode: "Редактирование",
             taskId: issue.id,
-            projectIdFromBoard: issue.boardId,
+            projectIdFromBoard: issue.boardId || boardId,
         });
     };
 
