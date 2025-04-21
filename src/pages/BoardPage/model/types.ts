@@ -1,7 +1,7 @@
-import { Issue } from "@/entities/issue";
+import { BoardIssue } from "@/entities/board";
 
 export interface BoardColumnProps {
     title: string;
     status: "Backlog" | "InProgress" | "Done";
-    tasks: Issue[];
+    tasks: BoardIssue[];
 }

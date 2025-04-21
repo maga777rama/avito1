@@ -1,9 +1,11 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import BoardsPage from "@/pages/BoardsPage";
-import IssuesPage from "@/pages/IssuesPage";
+import { lazy } from "react";
 import { Header } from "@/widgets/Header";
-import BoardPage from "@/pages/BoardPage";
-import Modal from "@/features/taskModal";
+import { Navigate, Route, Routes } from "react-router-dom";
+
+const IssuesPage = lazy(() => import("@/pages/IssuesPage"));
+const BoardsPage = lazy(() => import("@/pages/BoardsPage"));
+const BoardPage = lazy(() => import("@/pages/BoardPage"));
+const Modal = lazy(() => import("@/features/taskModal"));
 
 export const App = () => {
     return (
@@ -11,8 +13,8 @@ export const App = () => {
             <Header />
             <Routes>
                 <Route path="/boards" element={<BoardsPage />} />
-                <Route path="/issues" element={<IssuesPage />} />
                 <Route path="/board/:id" element={<BoardPage />} />
+                <Route path="/issues" element={<IssuesPage />} />
                 <Route path="*" element={<Navigate to="/boards" />} />
             </Routes>
             <Modal />

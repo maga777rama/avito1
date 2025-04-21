@@ -1,17 +1,18 @@
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import { BoardColumn } from "./BoardColumn.tsx";
-import { useBoardTasks } from "@/pages/BoardPage";
 import { TaskStatus } from "@/entities/issue";
 import { useOpenModalFromRoute } from "@/shared/lib/hooks";
 import { useUpdateTaskStatus } from "@/features/updateTaskStatus";
-import { useBoards } from "@/entities/board";
+import { useBoard } from "@/entities/board";
 import styles from "./Board.module.scss";
+import { useParams } from "react-router-dom";
 const BoardPage = () => {
-    const { tasks, boardId, isLoading } = useBoardTasks();
-    const { boards } = useBoards();
-    useOpenModalFromRoute(boardId);
+    const { id } = useParams<{ id: string }>();
+    const boardId = Number(id);
 
-    const currentBoard = boards.find((board) => board.id === boardId);
+    const { tasks, loading } = useBoard(boardId);
+
+    useOpenModalFromRoute(boardId);
 
     const { mutate: updateStatus } = useUpdateTaskStatus(boardId);
 
@@ -33,14 +34,12 @@ const BoardPage = () => {
         Done: tasks.filter((t) => t.status === "Done"),
     };
 
-    if (isLoading) return <div>Загрузка...</div>;
+    if (loading) return <div>Загрузка...</div>;
 
     return (
         <div className={styles.boardPage}>
             <div>
-                <h2 className={styles.projectName}>
-                    {currentBoard?.name || "Название проекта"}
-                </h2>
+                <h2 className={styles.projectName}>{"Название проекта"}</h2>
             </div>
             <DragDropContext onDragEnd={handleDragEnd}>
                 <div className={styles.columnsBlock}>

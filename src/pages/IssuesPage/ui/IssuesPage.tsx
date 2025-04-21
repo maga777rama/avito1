@@ -12,7 +12,7 @@ const IssuesPage = () => {
     // отдельно отправляется запрос на получение списка проектов
     // предполагается что возможен случай когда проект создан, но задачи еще не добавлены
     // поэтому сделал так вместо того, чтобы составлять список проектов по задачам
-    const { boards } = useBoards();
+    const { boards } = useBoards(!loading);
 
     const { openModal } = useModal();
     const [searchValue, setSearchValue] = useState("");
